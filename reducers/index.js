@@ -1,12 +1,12 @@
 // reducers/index.js
 
 import { combineReducers } from 'redux'
-import people from './people'
+import appReducer from './appReducer'
 
 
 
 const rootReducer = combineReducers({
-    people
+    appReducer
 })
 
 export default rootReducer

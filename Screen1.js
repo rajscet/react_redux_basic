@@ -21,25 +21,29 @@ import {
        super(props);
    }
 
+
+   
+
   render() {
       
     return (
       <View >
 
         {
-          this.props.people.map((person, index) => (
+          this.props.peopleList.map((person, index) => (
             <View key={index} style={styles.person}>
               <Text>Name: {person.name}</Text>
               <Text onPress={() => this.props.deletePerson(person)}>Delete Person</Text>
             </View>
           ))
         }
-        <TouchableOpacity>
+        <TouchableOpacity style={{top:100}}>
           <Button
             onPress={() => this.props.navigation.navigate('Screen2')}
-            title="Go to Person List"
+            title="Go to Next List"
           />
         </TouchableOpacity>
+        <Text>{this.props.counterValue}</Text>
       </View>
     )
   }
@@ -53,9 +57,11 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    people: state.people.people
+    peopleList: state.appReducer.people,   
+    counterValue: state.appReducer.counter
   }
 }
+
 
 
 const mapDispatchToProps = {

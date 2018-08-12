@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Button, TouchableOpacity, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
-import { addPerson } from './actions';
+import { addPerson ,setCount} from './actions';
 // import PersonList from './PersonList'
 import { connect } from 'react-redux';
 
@@ -15,28 +15,55 @@ class Main extends React.Component {
     super(props);
   }
   state = {
-    inputValue: '',
+    personName: '',couterValue:''
   }
 
   addPersonValue = () => {
    
-    if (this.state.inputValue === '') return;
-    this.props.addPerson({name:this.state.inputValue});
-    this.setState({ inputValue: '' });
+    if (this.state.personName === '') return;
+    this.props.addPerson({name:this.state.personName});
+    this.setState({ personName: '' });
   }
-  updateInput = (inputValue) => {
-    this.setState({ inputValue })
+
+  setCounterValue = () => {
+   
+    if (this.state.couterValue === '') return;
+    this.props.setCount(this.state.couterValue);
+    this.setState({ couterValue: '' });
   }
+  
+  updatePerson = (personName) => {
+    this.setState({ personName })
+  }
+
+  updateCounter = (couterValue) => {
+    this.setState({ couterValue })
+  }
+
   render() {
     
     return (
 
       <View style={styles.container}>
+       <TextInput
+          onChangeText={text => this.updateCounter(text)}
+          style={styles.input}
+          value={this.state.couterValue}
+          keyboardType={'numeric'}
+          placeholder="Counter"
+        />
+        <TouchableHighlight
+          underlayColor="#ffa012"
+          style={styles.button}
+          onPress={() =>this.setCounterValue()}
+        >
+          <Text style={styles.buttonText}>Set Counter</Text>
+        </TouchableHighlight>
         
         <TextInput
-          onChangeText={text => this.updateInput(text)}
+          onChangeText={text => this.updatePerson(text)}
           style={styles.input}
-          value={this.state.inputValue}
+          value={this.state.personName}
           placeholder="Name"
         />
         <TouchableHighlight
@@ -49,7 +76,7 @@ class Main extends React.Component {
         <TouchableOpacity>
           <Button
             onPress={() => this.props.navigation.navigate('Screen1')}
-            title="Go to Person List"
+            title="Go to Next Screen"
           />
         </TouchableOpacity>
       </View>
@@ -88,15 +115,12 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = {
-  addPerson
+  addPerson,
+  setCount
 };
-function mapStateToProps(state) {
-  return {
-    people: state.people.people
-  }
-}
+
 
 export default sts = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(Main)
