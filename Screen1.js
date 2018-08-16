@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 function mapStateToProps (state) {
   return {
     peopleList: state.appReducer.people,   
-    counterValue: state.appReducer.counter
+    counterValue: state.counterReducer.counter
   }
 }
 

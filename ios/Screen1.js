@@ -2,27 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {  deletePerson } from './actions';
 
+
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
 
- class Screen2 extends React.Component {
+ class Screen1 extends React.Component {
 
   static navigationOptions = {
-    title: 'Screen 2'
+    title: 'Screen 1'
 };
-
    constructor(props)
    {
        super(props);
    }
 
+
+   
+
   render() {
       
     return (
-      <View style={{flex:1}} > 
       <View >
 
         {
@@ -33,8 +37,13 @@ import {
             </View>
           ))
         }
-        </View>
-        <Text style={{margin:20}}>{this.props.counterValue}</Text>
+        <TouchableOpacity style={{top:100}}>
+          <Button
+            onPress={() => this.props.navigation.navigate('Screen2')}
+            title="Go to Next List"
+          />
+        </TouchableOpacity>
+        <Text>{this.props.counterValue}</Text>
       </View>
     )
   }
@@ -46,13 +55,13 @@ const styles = StyleSheet.create({
   },
 });
 
-// left-right: variablename for usage : original state value
 function mapStateToProps (state) {
   return {
     peopleList: state.appReducer.people,   
-    counterValue: state.counterReducer.counter
+    counterValue: state.appReducer.counter
   }
 }
+
 
 
 const mapDispatchToProps = {
@@ -62,5 +71,5 @@ const mapDispatchToProps = {
 export default  sts= connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Screen2)
+)(Screen1)
 

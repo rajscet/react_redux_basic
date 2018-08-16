@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 function mapStateToProps (state) {
   return {
     peopleList: state.appReducer.people,   
-    counterValue: state.counterReducer.counter
+    counterValue: state.appReducer.counter
   }
 }
 
